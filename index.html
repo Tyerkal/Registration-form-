@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="submit"] {
+      margin-top: 20px;
+    }
+
+    #registrationData {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registration Form</h1>
+  <form id="registrationForm">
+    <label>
+      First Name:
+      <input type="text" name="firstName" required>
+    </label>
+    <label>
+      Last Name:
+      <input type="text" name="lastName" required>
+    </label>
+    <label>
+      Email:
+      <input type="email" name="email" required>
+    </label>
+    <label>
+      Password:
+      <input type="password" name="password" minlength="8" required>
+    </label>
+    <input type="submit" value="Register">
+  </form>
+  <div id="registrationData"></div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const registrationData = document.getElementById('registrationData');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const data = {};
+      for (const [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+      displayRegistrationData(data);
+    });
+
+    function displayRegistrationData(data) {
+      let html = '<h2>Registration Data</h2>';
+      html += '<ul>';
+      for (const key in data) {
+        html += `<li><strong>${key}:</strong> ${data[key]}</li>`;
+      }
+      html += '</ul>';
+      registrationData.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
